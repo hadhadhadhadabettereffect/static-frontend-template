@@ -1,0 +1,18 @@
+{
+    "html": {
+        "src": ["src/html/index.pug"],
+        "outDir": "build/html",
+        "minify": false
+    },
+    "css": {
+        "src": ["src/css/main.css"],
+        "outDir": "build/css",
+        "minify": true,
+        "plugins": ["postcss-import", "precss", "autoprefixer"]
+    },
+    "js": {
+        "src": ["src/js/main.ts"],
+        "outDir": "build/js",
+        "minify": true
+    }
+}
