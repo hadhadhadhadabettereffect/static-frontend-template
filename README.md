@@ -1,8 +1,8 @@
 # front end starter template
 basic project template for transpiling static js/css/html files.
-* js : [typescript](https://www.typescriptlang.org/) and [browserify](http://browserify.org/)
-* html : [pug](https://pugjs.org)
-* css : [postcss](http://postcss.org/) with plugins:
+* js: [typescript](https://www.typescriptlang.org/) and [browserify](http://browserify.org/)
+* html: [pug](https://pugjs.org)
+* css: [postcss](http://postcss.org/) with plugins:
     * [precss](https://github.com/jonathantneal/precss)
     * [postcss-import](https://github.com/postcss/postcss-import)
     * [cssnano](http://cssnano.co/)
@@ -10,14 +10,17 @@ basic project template for transpiling static js/css/html files.
 
 ## usage
 ```bash
-$ git clone git@github.com:hadhadhadhadabettereffect/static-frontend-template.git {{project}} && cd {{project}}
+$ git clone https://github.com/hadhadhadhadabettereffect/static-frontend-template.git {{project}} && cd {{project}}
+$ rm -rf .git
+$ git init
 $ npm install
 ```
-* edit build output paths in config.json
+* edit build output paths in config.json. these can be outside the current directory. e.g. "../static"
 * add/edit files in src directory
 * if outputting multiple files, add entry file paths to 'src' arrays in config.json. otherwise default entry files are src/css/main.css, src/js/main.ts, src/css/index.pug.
-* run `$ gulp build` to output bundled src files to dist dirs set in config.json. minifies output if option set in config.json
-* default `$ gulp` task starts server on localhost:8000, watches for changes in src, and outputs bundled files to dist dirs. does not minify files.
+* `$ gulp build` bundles src files and writes to dist dirs set in config.json
+* `$ gulp watch` watches for changes in src and reruns build task when files updated
+* `$ gulp` serves output index.html at localhost:8000, watches for changes in src, and livereloads when files updated. localhost port can be set in config.json.
 
 ## config
 build options can be added to config.json
