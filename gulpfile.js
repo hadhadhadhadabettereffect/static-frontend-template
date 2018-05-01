@@ -32,10 +32,17 @@ var reload = false;
 /**
  * merge default options with config.json
  */
+
+var serverRoots = [path.join(__dirname, config.html.outDir)];
+var assetRoot = path.join(__dirname, config.css.outDir, "..");
+if (serverRoots.indexOf(assetRoot) == -1) serverRoots.push(assetRoot);
+assetRoot = path.join(__dirname, config.js.outDir, "..");
+if (serverRoots.indexOf(assetRoot) == -1) serverRoots.push(assetRoot);
+
 var serverOptions = mergeOptions({
     port: 8000,
     livereload: true,
-    root: ["build", path.resolve(__dirname, config.html.outDir)]
+    root: serverRoots
 }, "serverOptions", "html");
 
 var browserifyOptions = mergeOptions({
@@ -134,7 +141,7 @@ gulp.task("connect", function () {
 /**
  * watch for changes in ./src, bundle and livereload
  */
-gulp.task("watch", function () {
+gulp.task("watch", ["build"], function () {
     gulp.watch(["./src/js/*.ts"], ["js"]);
     gulp.watch(["./src/css/*.css"], ["css"]);
     gulp.watch(["./src/html/*.pug"], ["html"]);
@@ -148,7 +155,7 @@ gulp.task("build", ["html", "css", "js"]);
 /**
  * bundle files, watch for changes, and serve on localhost:8000
  */
-gulp.task("default", ["build", "connect", "watch"], function () {
+gulp.task("default", ["watch", "connect"], function () {
     reload = serverOptions.livereload;
 });
 
