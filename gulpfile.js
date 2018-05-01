@@ -157,13 +157,40 @@ gulp.task("default", ["build", "connect", "watch"], function () {
  * @param {object} base - default options
  * @param {string} label - name of options in config.json
  * @param {string} parent - where to look for options first (e.g. 'js' looks in config.js)
- * @returns {object} merged dictionary
+ * @return {object} merged object
  */
 function mergeOptions (base, label, parent) {
     if (config[parent].hasOwnProperty(label))
-        return Object.assign(base, config[parent][label]);
+        return mergeObjs(base, config[parent][label]);
     if (config.hasOwnProperty(label))
-        return Object.assign(base, config[label]);
+        return mergeObjs(base, config[label]);
     return base;
 }
 
+/**
+ * merge objects
+ * values from b merged into a, replacing non-object values
+ * object values are recursively merged
+ * e.g. a = { x: 0, y: { foo: 0 } }, b = { x: 1, y: { bar: 1 } }
+ *      merged = { x: 1,  y: { foo: 0, bar: 1 } }
+ */
+function mergeObjs (a, b) {
+    for (let k of Object.keys(b)) {
+        if (a.hasOwnProperty(k) &&
+            typeof a[k] == "object" &&
+            typeof b[k] == "object") {
+            // if both arrays, concat
+            if (Array.isArray(a[k])) {
+                if (Array.isArray(b[k])) {
+                    a[k] = a[k].concat(b[k]);
+                    continue;
+                }
+            }
+            // if both objects, merge
+            a[k] = mergeObjs(a[k], b[k]);
+            continue;
+        }
+        a[k] = b[k];
+    }
+    return a;
+}
