@@ -16,7 +16,7 @@ $ git init
 $ npm install
 ```
 * edit build output paths in config.json. these can be outside the current directory. e.g. "../static"
-* add/edit files in src directory
+* add/edit files in src directory. [example branch](https://github.com/hadhadhadhadabettereffect/static-frontend-template/tree/example) has some example src files.
 * if outputting multiple files, add entry file paths to 'src' arrays in config.json. otherwise default entry files are src/css/main.css, src/js/main.ts, src/css/index.pug.
 * `$ gulp build` bundles src files and writes to dist dirs set in config.json
 * `$ gulp watch` watches for changes in src and reruns build task when files updated

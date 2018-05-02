@@ -1,11 +1,1 @@
 @import "vars";
-@import "mixins";
-
-#main {
-    @extend %center;
-    width: 500px;
-    margin-top: 40%;
-    font-size: $fontsize--large;
-    padding: 20px 0;
-    user-select: none;
-}
