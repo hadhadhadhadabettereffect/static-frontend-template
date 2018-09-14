@@ -53,7 +53,7 @@ var browserifyOptions = mergeOptions({
 }, "browserifyOptions", "js");
 
 var tsOptions = mergeOptions({
-    noImplicitAny: true
+    noImplicitAny: false
 }, "typescriptOptions", "js");
 
 var uglifyOptions = mergeOptions({
